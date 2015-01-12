@@ -6,12 +6,19 @@ python:
   - "3.3"
   - "3.4"
   - "pypy"
-install:
-  - pip install coverage
-  - pip install coveralls
-script:
+before_install:
+  - which python
   - python -c 'from __future__ import print_function; import distutils.sysconfig; print(distutils.sysconfig.get_python_version())'
   - python -c 'from __future__ import print_function; from distutils import sysconfig; print(sysconfig.get_config_var("LIBDIR"))'
   - python -c 'from __future__ import print_function; from distutils import sysconfig; print(sysconfig.get_config_var("DESTSHARED"))'
   - python -c 'from __future__ import print_function; import distutils.sysconfig; print(distutils.sysconfig.get_python_inc())'
-
+install:
+  - pip install coverage
+  - pip install coveralls
+script:
+  - which python
+  - python -c 'from __future__ import print_function; import distutils.sysconfig; print(distutils.sysconfig.get_python_version())'
+  - python -c 'from __future__ import print_function; from distutils import sysconfig; print(sysconfig.get_config_var("LIBDIR"))'
+  - python -c 'from __future__ import print_function; from distutils import sysconfig; print(sysconfig.get_config_var("DESTSHARED"))'
+  - python -c 'from __future__ import print_function; import distutils.sysconfig; print(distutils.sysconfig.get_python_inc())'
+  - python -c "import coverage"
