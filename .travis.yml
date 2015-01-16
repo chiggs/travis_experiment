@@ -1,24 +1,14 @@
 language: python
 python:
-  - "2.6"
   - "2.7"
-  - "3.2"
-  - "3.3"
-  - "3.4"
-  - "pypy"
 before_install:
-  - which python
-  - python -c 'from __future__ import print_function; import distutils.sysconfig; print(distutils.sysconfig.get_python_version())'
-  - python -c 'from __future__ import print_function; from distutils import sysconfig; print(sysconfig.get_config_var("LIBDIR"))'
-  - python -c 'from __future__ import print_function; from distutils import sysconfig; print(sysconfig.get_config_var("DESTSHARED"))'
-  - python -c 'from __future__ import print_function; import distutils.sysconfig; print(distutils.sysconfig.get_python_inc())'
-install:
-  - pip install coverage
-  - pip install coveralls
+  - sudo apt-get update -qq
+  - sudo apt-get install -y python-imaging
+  - git clone https://github.com/potentialventures/cocotb.git
+  - export COCOTB=$PWD/cocotb
+  - wget https://github.com/chiggs/travis_experiment/releases/download/v0.1.pre/modelsim_reduced.tgz
+  - tar -xzf modelsim_reduced.tgz
+  - export PATH=$PWD/modelsim_reduced/bin:$PATH
 script:
-  - which python
-  - python -c 'from __future__ import print_function; import distutils.sysconfig; print(distutils.sysconfig.get_python_version())'
-  - python -c 'from __future__ import print_function; from distutils import sysconfig; print(sysconfig.get_config_var("LIBDIR"))'
-  - python -c 'from __future__ import print_function; from distutils import sysconfig; print(sysconfig.get_config_var("DESTSHARED"))'
-  - python -c 'from __future__ import print_function; import distutils.sysconfig; print(distutils.sysconfig.get_python_inc())'
-  - python -c "import coverage"
+  - cd tb && PYTHONPATH=/home/travis/virtualenv/python2.7.9/lib/python2.7/site-packages make SIM=modelsim
+
