@@ -13,7 +13,8 @@ before_install:
   - wget https://github.com/chiggs/travis_experiment/releases/download/v0.2.pre/modelsim_reduced.tgz
   - tar -xzf modelsim_reduced.tgz
   - export PATH=$PWD/modelsim_reduced/bin:$PATH
-  - git clone https://github.com/chiggs/oc_jpegencode
+#  - git clone https://github.com/chiggs/oc_jpegencode
 script:
-  - cd oc_jpegencode/tb && PATH=/tmp/python-2.7.9/i686/bin:$PATH LD_LIBRARY_PATH=/tmp/python-2.7.9/i686/lib make SIM=modelsim
+  - cd cocotb/examples/endian_swapper/tests && PATH=/tmp/python-2.7.9/i686/bin:$PATH LD_LIBRARY_PATH=/tmp/python-2.7.9/i686/lib make SIM=modelsim
+#  - cd oc_jpegencode/tb && PATH=/tmp/python-2.7.9/i686/bin:$PATH LD_LIBRARY_PATH=/tmp/python-2.7.9/i686/lib make SIM=modelsim
 
