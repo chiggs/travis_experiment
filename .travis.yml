@@ -10,7 +10,7 @@ before_install:
   - cd
   - git clone https://github.com/potentialventures/cocotb.git
   - export COCOTB=$PWD/cocotb
-  - wget https://github.com/chiggs/travis_experiment/releases/download/v0.1.pre/modelsim_reduced.tgz
+  - wget https://github.com/chiggs/travis_experiment/releases/download/v0.2.pre/modelsim_reduced.tgz
   - tar -xzf modelsim_reduced.tgz
   - export PATH=$PWD/modelsim_reduced/bin:$PATH
   - git clone https://github.com/chiggs/oc_jpegencode
