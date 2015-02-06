@@ -1,9 +1,13 @@
-language: python
-python:
-  - "2.7"
+language: c
 before_install:
   - sudo apt-get update -qq
-  - sudo apt-get install -y python-imaging libc6-dev-i386
+  - sudo apt-get install -y libc6-dev-i386 
+  - wget https://www.python.org/ftp/python/2.7.9/Python-2.7.9.tgz
+  - tar -zxf Python-2.7.9.tgz
+  - cd Python-2.7.9 && OPT=-m32 CFLAGS=-m32 LDFLAGS=-m32 ./configure --prefix=/tmp/python-2.7.9/i686 --disable-ipv6 --enable-shared
+  - make -s -j 2
+  - make install
+  - cd
   - git clone https://github.com/potentialventures/cocotb.git
   - export COCOTB=$PWD/cocotb
   - wget https://github.com/chiggs/travis_experiment/releases/download/v0.1.pre/modelsim_reduced.tgz
@@ -11,5 +15,5 @@ before_install:
   - export PATH=$PWD/modelsim_reduced/bin:$PATH
   - git clone https://github.com/chiggs/oc_jpegencode
 script:
-  - cd oc_jpegencode/tb && PYTHONPATH=/home/travis/virtualenv/python2.7.9/lib/python2.7/site-packages make SIM=modelsim
+  - cd oc_jpegencode/tb && PATH=/tmp/python-2.7.9/i686/bin:$PATH LD_LIBRARY_PATH=/tmp/python-2.7.9/i686/lib make SIM=modelsim
 
